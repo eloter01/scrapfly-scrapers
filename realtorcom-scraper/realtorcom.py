@@ -106,10 +106,10 @@ def parse_search(result: ScrapeApiResponse) -> Dict:
     return data
 
 
-async def scrape_search(state: str, city: str, max_pages: Optional[int] = None) -> List[Dict]:
+async def scrape_search(url_srch: str, state: str, city: str, max_pages: Optional[int] = None) -> List[Dict]:
     """scrape realtor.com's search and find properties for given query. Paginate to max pages if provided"""
     log.info("scraping first property search page for {}, {}", city, state)
-    first_page = f"https://www.realtor.com/realestateandhomes-search/{city}_{state}/pg-1"
+    first_page = url_search
     first_result = await SCRAPFLY.async_scrape(ScrapeConfig(first_page, **BASE_CONFIG))
     first_data = parse_search(first_result)
     results = first_data["properties"]

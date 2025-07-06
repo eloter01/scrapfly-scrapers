@@ -22,16 +22,16 @@ async def run():
 
     print("running Realtor.com scrape and saving results to ./results directory")
 
-    url = "https://www.realtor.com/realestateandhomes-detail/12355-Attlee-Dr_Houston_TX_77077_M70330-35605"
-    result_property = await realtorcom.scrape_property(url)
-    output.joinpath("property.json").write_text(json.dumps(result_property, indent=2))
+    # url = "https://www.realtor.com/realestateandhomes-detail/12355-Attlee-Dr_Houston_TX_77077_M70330-35605"
+    # result_property = await realtorcom.scrape_property(url)
+    # output.joinpath("property.json").write_text(json.dumps(result_property, indent=2))
 
-    result_search = await realtorcom.scrape_search("CA", "San-Francisco", max_pages=2)
+    result_search = await realtorcom.scrape_search("https://www.realtor.com/realestateandhomes-search/Middlesex-County_NJ/type-single-family-home/beds-3/baths-2/pnd-hide/price-na-600000/commute-100-Business-Park-Dr_Skillman_NJ-08558,40.40472,-74.669176,40m,drive,traffic/pg-1", "NJ", "Middlesex County")
     output.joinpath("search.json").write_text(json.dumps(result_search, indent=2))
 
-    url = "https://cdn.realtor.ca/sitemap/realtorsitemap/sitemap.xml"
-    result_feed = await realtorcom.scrape_feed(url)
-    output.joinpath("feed.json").write_text(json.dumps(result_feed, indent=2, cls=DateTimeEncoder))
+    # url = "https://cdn.realtor.ca/sitemap/realtorsitemap/sitemap.xml"
+    # result_feed = await realtorcom.scrape_feed(url)
+    # output.joinpath("feed.json").write_text(json.dumps(result_feed, indent=2, cls=DateTimeEncoder))
 
 
 class DateTimeEncoder(json.JSONEncoder):
